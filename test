@@ -3,3 +3,13 @@
 // also testing push and pull
 // broken :(
 // broken part two
+
+public class Main {
+
+	public static void main(String[] args) {
+		System.out.println("test")
+		});
+
+	}
+
+}
