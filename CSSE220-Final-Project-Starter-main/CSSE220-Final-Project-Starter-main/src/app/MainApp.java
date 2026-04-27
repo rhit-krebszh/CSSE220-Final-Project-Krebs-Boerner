@@ -7,7 +7,7 @@ import model.GameModel;
 
 /**
  * MainApp starts the program
- * @author Krebs & 
+ * @author Krebs & Boerner
  */
 public class MainApp {
 	
