@@ -36,7 +36,7 @@ public class GameComponent extends JComponent {
 		background = ImageIO.read(this.getClass().getResource("background.png"));
 	} catch (IOException e) {
 		
-		background = null; //fix
+		background = null; //fix -> finish, and use try catch lesson to update
 	
 	
 	}
@@ -46,6 +46,7 @@ public class GameComponent extends JComponent {
 	Graphics2D g2 = (Graphics2D)g;
 
 	// Minimal placeholder to test  it’s running
+	
 	
 	
 	player2.draw(g2);
@@ -58,7 +59,7 @@ public class GameComponent extends JComponent {
 		
 		// TODO: Move the ball horizontally by the given amount (x)
 		// Hint: call the ball's shift(...) method
-		player2.shift(x);
+		player2.shift(x); //make player2 public
 		repaint();
 	}
 	
