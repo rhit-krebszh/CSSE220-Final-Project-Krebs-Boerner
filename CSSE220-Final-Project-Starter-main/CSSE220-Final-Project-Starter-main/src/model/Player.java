@@ -12,7 +12,7 @@ import ui.GameComponent;
 
 public class Player {
 
-	private int x, y, radius;
+	private int x, y;
 	private int startX; // we use this for storing initial values
 	private int startY; // we use this for storing initial values
 	BufferedImage sprite;
@@ -24,16 +24,14 @@ public class Player {
 	private int dy = 5;
 	
 	
-	public Player(int x, int y, int radius) {
-		this.x = x - radius;
-		this.y = y - radius;
-		this.radius = radius;
+	public Player(int x, int y) {
+		this.x = x;
+		this.y = y;
 		this.startX = x; // the initial position
 		this.startY = y; // the initial position
-	
-	
+		
 		try {
-			sprite = ImageIO.read(Player.class.getResource("zombie.png"));
+			sprite = ImageIO.read(Player.class.getResource("player.png"));
 		} catch (IOException e) {
 			
 			sprite = null;
@@ -41,16 +39,17 @@ public class Player {
 		}
 		
 		public void drawOn(Graphics2D g2) {
-  			int x = this.col * TILE_SIZE;
-  			int y = this.row * TILE_SIZE;
+  			int x = col * TILE_SIZE;
+  			int y = row * TILE_SIZE;
   			
   			if (sprite != null) {
   				g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
-  			}else {
-  				g2.setColor(Color.CYAN);
+  			} else {
+  				g2.setColor(Color.BLUE);
   				g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
   			}
 		}
+  			
 		
 		public void moveBy(int dRow, int dCol){
 			this.row += dRow;

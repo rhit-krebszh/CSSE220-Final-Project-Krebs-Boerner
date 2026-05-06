@@ -35,6 +35,8 @@ public class GameComponent extends JComponent {
 	}).start();
 	
 	}
+	
+	
 //	public GameComponent() {
 //		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 //		this.setBackground(); // note this only works with JPanels and will not work with JComponents
