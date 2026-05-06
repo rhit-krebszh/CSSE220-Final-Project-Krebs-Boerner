@@ -21,11 +21,23 @@ public class Enemy {
 		
 		
 		 try {
-	           
 	            sprite = ImageIO.read(Player.class.getResource("/model/zombie.png"));
 	        } catch (IOException | IllegalArgumentException e) {
 	            sprite = null;
 	        }
+	}
+	
+	public void drawOn(Graphics2D g2) {
+        int x = this.col * TILE_SIZE;
+        int y = this.row * TILE_SIZE;
+		
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
+        } else {
+        	g2.setColor(Color.RED);
+    		g2.fillRect(col * 40, row * 40, 40, 40);
+        }
+		
 	}
 	
 	public void update() {
@@ -34,19 +46,6 @@ public class Enemy {
 		if (col <= 0 || col >= 10) {
 			direction *= -1;
 		}
-	}
-	
-	public void drawOn(Graphics2D g2) {
-        int x = this.col * TILE_SIZE;
-        int y = this.row * TILE_SIZE;
-		
-		g2.setColor(Color.RED);
-		g2.fillRect(col * 40, row * 40, 40, 40);
-		
-		if (sprite != null) {
-            g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
-        }
-		
 	}
 
 }

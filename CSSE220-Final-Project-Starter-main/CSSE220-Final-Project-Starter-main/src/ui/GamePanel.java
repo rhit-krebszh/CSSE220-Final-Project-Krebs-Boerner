@@ -1,12 +1,10 @@
-package model;
+package ui;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
-
-import ui.GameComponent;
 
 public class GamePanel extends JPanel{
 	private GameComponent Canvas;

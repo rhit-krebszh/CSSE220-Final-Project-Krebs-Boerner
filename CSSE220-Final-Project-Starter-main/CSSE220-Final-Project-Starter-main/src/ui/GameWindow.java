@@ -5,16 +5,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
-import Tier3Game.GamePanel;
 //import model.GameModel;
 /**
  * GameWindow owns the frame
  **/
 public class GameWindow {
 	
-	private JFrame frame;// = //new JFrame();
-//	private GameModel model; //= new GameModel();
-	
+	private JFrame frame;
 	private GamePanel panel;
 
 	public GameWindow() { //pass model
@@ -35,15 +32,10 @@ public class GameWindow {
 //		    }
 //		});
 		
-//		this.model = model;
-		
-		
 		this.frame = new JFrame("CSSE220 Final Project");
-
-		this.frame.setContentPane(this.panel);
-
+		this.panel = new GamePanel();
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		this.frame.add(new GameComponent(this.model));
+		this.frame.setContentPane(this.panel);
 		this.frame.setSize(600, 600);
 		this.frame.setLocationRelativeTo(null);
 	}

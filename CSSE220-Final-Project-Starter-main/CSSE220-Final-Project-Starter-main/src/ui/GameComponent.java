@@ -11,24 +11,32 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import model.GameModel;
 import model.Player;
 
 
 
-public class GameComponent extends JComponent {
-	
-	private Player player;
-	
-	public static final int TILE_SIZE = 40;
+public class GameComponent extends JPanel {
 	
 	private GameModel model;
-	
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 600;
+	public static final Color BG = Color.CYAN;
+	public static final Color FG = Color.BLACK;
 	BufferedImage background;
+	private Timer timer;
+	
+	private Player player;
+	public static final int TILE_SIZE = 40;
 
 	public GameComponent() {
-//	this.model = model;
+		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		this.setBackground(BG);
+		this.setOpaque(true);
+		
+		model = new GameModel();
 	
 	try {
 		background = ImageIO.read(getClass().getResource("background.png"));
@@ -65,9 +73,9 @@ public class GameComponent extends JComponent {
 	Graphics2D g2 = (Graphics2D)g;
 	
 	if (background != null) {
-		g2.drawImage(background, 0, 0, getWidth(), getHeight(),null);
+		g2.drawImage(background, 0, 0, WIDTH, HEIGHT,null);
 	} else {
-		g2.setColor(Color.BLACK);
+		g2.setColor(FG);
 	}
 
 	// Minimal placeholder to test  it’s running

@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import javax.imageio.ImageIO;
 
@@ -14,13 +15,10 @@ public class Player {
     private int row;
     private int col;
 
-    
-    
-    
-    
-    
     private int startRow;
     private int startCol;
+    private int dx = 3;
+	private int dy = 2;
 
     private BufferedImage sprite;
 
@@ -40,24 +38,22 @@ public class Player {
         } catch (IOException | IllegalArgumentException e) {
             sprite = null;
         }
-        
-        
+            
     }
     
-    
-    
-
     public void drawOn(Graphics2D g2) {
         int x = this.col * TILE_SIZE;
         int y = this.row * TILE_SIZE;
 
-        // Draw square background, need to use tiels
-        g2.setColor(Color.RED);
-        g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+        // Draw square background, need to use tiles
+        
 
         // Draw da ting
         if (sprite != null) {
             g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
+        } else {
+        	g2.setColor(Color.RED);
+            g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
         }
     }
 
@@ -93,8 +89,44 @@ public class Player {
         this.row = startRow;
         this.col = startCol;
     }
+    
+//    public void update() {
+//    	row += dx;
+//    	col += dy;
+//    	
+//    	// LEFT / RIGHT walls
+//	    if (row <= 0) {
+//	        row = 0;
+//	        dx = -dx;
+//	    }
+//
+//		 if (col + 2 * col >= GameComponent.WIDTH) { col = GameComponent.WIDTH - 2 *
+//		 col; dx = -dx; }
+//
+//	    // TOP / BOTTOM walls
+//	    if (col <= 0) {
+//	        col = 0;
+//	        dy = -dy;
+//	    }
+//
+//		
+//		 if (col + 2 * col >= GameComponent.HEIGHT) { col = GameComponent.HEIGHT - 2 *
+//		 col; dy = -dy; }
+//    }
+    
+    public Rectangle getBounds() {
+	    return new Rectangle(row, col, row * 2, col * 2);
+	}
+
+//	@Override
+//	public boolean collidesWith(Collidable other) {
+//		Player otherPlayer = (Player) other;
+//		return this.getBounds().intersects(otherPlayer.getBounds());
+//	}
 }
-			
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //			
 		
 
