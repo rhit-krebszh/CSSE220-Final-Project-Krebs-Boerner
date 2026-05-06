@@ -9,53 +9,74 @@ import javax.imageio.ImageIO;
 
 import ui.GameComponent;
 
-
 public class Player {
 
-	private int x, y;
-	private int startX; // we use this for storing initial values
-	private int startY; // we use this for storing initial values
-	BufferedImage sprite;
-	private static final int TILE_SIZE = 40;
-	private int col;
-	private int row;
-	
-	private int dx = 5;
-	private int dy = 5;
-	
-	
-	public Player(int x, int y) {
-		this.x = x;
-		this.y = y;
-		this.startX = x; // the initial position
-		this.startY = y; // the initial position
-		
-		try {
-			sprite = ImageIO.read(Player.class.getResource("player.png"));
-		} catch (IOException e) {
-			
-			sprite = null;
-			}
-		}
-		
-		public void drawOn(Graphics2D g2) {
-  			int x = col * TILE_SIZE;
-  			int y = row * TILE_SIZE;
-  			
-  			if (sprite != null) {
-  				g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
-  			} else {
-  				g2.setColor(Color.BLUE);
-  				g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
-  			}
-		}
-  			
-		
-		public void moveBy(int dRow, int dCol){
-			this.row += dRow;
-			this.col += dCol;
-			
-//			//moveUp
+    private int row;
+    private int col;
+
+    
+    
+    
+    
+    
+    private int startRow;
+    private int startCol;
+
+    private BufferedImage sprite;
+
+    private static final int TILE_SIZE = 40;
+
+    public Player(int x, int y) {
+        
+        this.col = x / TILE_SIZE;
+        this.row = y / TILE_SIZE;
+
+        this.startRow = row;
+        this.startCol = col;
+
+        try {
+           
+            sprite = ImageIO.read(Player.class.getResource("/model/tennis.png"));
+        } catch (IOException | IllegalArgumentException e) {
+            sprite = null;
+        }
+        
+        
+    }
+    
+    
+    
+
+    public void drawOn(Graphics2D g2) {
+        int x = this.col * TILE_SIZE;
+        int y = this.row * TILE_SIZE;
+
+        // Draw square background, need to use tiels
+        g2.setColor(Color.RED);
+        g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        // Draw da ting
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
+        }
+    }
+
+    public void moveBy(int dRow, int dCol) {
+        row += dRow;
+        col += dCol;
+
+        // columns
+        if (col < 0) col = 0;
+        if (col >= GameComponent.WIDTH / TILE_SIZE) {
+            col = (GameComponent.WIDTH / TILE_SIZE) - 1;
+        }
+        
+
+        // rows
+        if (row < 0) row = 0;
+        if (row >= GameComponent.HEIGHT / TILE_SIZE) {
+            row = (GameComponent.HEIGHT / TILE_SIZE) - 1;
+        }//moveUp
 //			this.row = this.row - dRow;
 //			
 //			//moveDown
@@ -66,7 +87,21 @@ public class Player {
 //			
 //			//moveRight
 //			this.col = this.col + dCol;
-		}
+    }
+
+    public void reset() {
+        this.row = startRow;
+        this.col = startCol;
+    }
+}
+			
+//			
+		
+
+//		public void reset() {
+//			// TODO Auto-generated method stub
+//			this.x = this.startX;
+//		
 		
 		
 	/*public void draw(Graphics2D g2) {
@@ -119,5 +154,4 @@ public class Player {
 	    }*/
 
 
-}
 

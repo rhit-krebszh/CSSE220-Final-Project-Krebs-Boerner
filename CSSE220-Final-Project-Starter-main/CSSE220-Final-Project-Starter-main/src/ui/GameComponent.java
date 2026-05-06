@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -14,14 +15,20 @@ import javax.swing.JComponent;
 import model.GameModel;
 import model.Player;
 
+
+
 public class GameComponent extends JComponent {
 	
 	private Player player;
+	
+	public static final int TILE_SIZE = 40;
+	
 	private GameModel model;
+	
 	BufferedImage background;
 
-	public GameComponent(GameModel model) {
-	this.model = model;
+	public GameComponent() {
+//	this.model = model;
 	
 	try {
 		background = ImageIO.read(getClass().getResource("background.png"));
@@ -35,8 +42,6 @@ public class GameComponent extends JComponent {
 	}).start();
 	
 	}
-	
-	
 //	public GameComponent() {
 //		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
 //		this.setBackground(); // note this only works with JPanels and will not work with JComponents
@@ -61,9 +66,12 @@ public class GameComponent extends JComponent {
 	
 	if (background != null) {
 		g2.drawImage(background, 0, 0, getWidth(), getHeight(),null);
+	} else {
+		g2.setColor(Color.BLACK);
 	}
 
 	// Minimal placeholder to test  it’s running
+//	player.drawOn(g2);
 	
 	model.getPlayer().drawOn(g2);
 	model.getEnemy().drawOn(g2);
@@ -72,17 +80,20 @@ public class GameComponent extends JComponent {
 //add what does stuff
 	// TODO: draw based on model state
 	}
-	public void move(int x) {
+	public void move(int dRow, int dCol) {
 		
 		// TODO: Move the ball horizontally by the given amount (x)
 		// Hint: call the ball's shift(...) method
 		
-		if (x < 0) {
-			model.getPlayer().moveBy(0, -1);
-		} else {
-			model.getPlayer().moveBy(0, 1);
-		}
+//		if (x < 0) {
+//			model.getPlayer().moveBy(0, -1);
+//		} else {
+//			model.getPlayer().moveBy(0, 1);
+//		}
+//		player.moveBy(dRow, dCol);
+
 		
+		player.moveBy(dRow, dCol);
 		//player2.shift(x); //make player2 public
 		repaint();
 	}
@@ -92,8 +103,10 @@ public class GameComponent extends JComponent {
 	 */
 	public void center() {
 		// TODO: Reset the ball to its starting position
-		//player2.reset();
+		player.reset();
 		repaint();
 	}	
 	
 }
+	
+

@@ -9,26 +9,24 @@ import javax.imageio.ImageIO;
 
 public class Enemy {
 	
-	private int x, y;
-	private int startX; // we use this for storing initial values
-	private int startY; // we use this for storing initial values
-	BufferedImage sprite;
-	private static final int TILE_SIZE = 40;
-	private int col;
-	private int row;
+	private int col, row;
+	 private BufferedImage sprite;
+	 
+	  private static final int TILE_SIZE = 40;
+	private int direction = 1;
 	
 	public Enemy(int row, int col) {
 		this.row = row;
 		this.col = col;
 		
-		try {
-			sprite = ImageIO.read(Player.class.getResource("zombie.png"));
-		} catch (IOException e) {
-			
-			sprite = null;
-			}
-		}
-	
+		
+		 try {
+	           
+	            sprite = ImageIO.read(Player.class.getResource("/model/zombie.png"));
+	        } catch (IOException | IllegalArgumentException e) {
+	            sprite = null;
+	        }
+	}
 	
 	public void update() {
 		col += direction;
@@ -39,12 +37,15 @@ public class Enemy {
 	}
 	
 	public void drawOn(Graphics2D g2) {
+        int x = this.col * TILE_SIZE;
+        int y = this.row * TILE_SIZE;
+		
+		g2.setColor(Color.RED);
+		g2.fillRect(col * 40, row * 40, 40, 40);
+		
 		if (sprite != null) {
-				g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
-			}else {
-				g2.setColor(Color.CYAN);
-				g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
-			}
+            g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
+        }
 		
 	}
 

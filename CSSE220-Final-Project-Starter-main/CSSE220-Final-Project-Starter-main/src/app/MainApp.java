@@ -21,7 +21,7 @@ public class MainApp {
 	// MainApp creates and connects objects (no game logic here)
 	public void run() {
 		GameModel model = new GameModel();
-		GameWindow window = new GameWindow(model);
+		GameWindow window = new GameWindow();
 		window.show();
 	}
 	

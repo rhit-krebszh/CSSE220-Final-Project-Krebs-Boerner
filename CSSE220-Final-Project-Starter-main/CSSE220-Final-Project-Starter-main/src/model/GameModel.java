@@ -19,7 +19,7 @@ public class GameModel {
 	private Enemy enemy;
 	
 	public GameModel() {
-		player = new Player(5,5,20);	
+		player = new Player(5,5);	
 		enemy = new Enemy(3,3);
 		
 		Timer timer = new Timer(30, e -> update());
