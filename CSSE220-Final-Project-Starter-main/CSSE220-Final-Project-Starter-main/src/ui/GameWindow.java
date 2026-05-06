@@ -1,5 +1,8 @@
 package ui;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JFrame;
 
 import model.GameModel;
@@ -8,10 +11,26 @@ import model.GameModel;
  **/
 public class GameWindow {
 	
-	private final JFrame frame;
-	private final GameModel model;
+	private JFrame frame = new JFrame();
+	private GameModel model = new GameModel();
 	
 	public GameWindow(GameModel model) {
+		
+		GameComponent comp = new GameComponent(this.model);
+		this.frame.add(comp);
+		comp.setFocusable(true);
+		comp.requestFocusInWindow();
+
+		comp.addKeyListener(new KeyAdapter() {
+		    public void keyPressed(KeyEvent e) {
+		        if (e.getKeyCode() == KeyEvent.VK_A) {
+		            comp.move(-10);
+		        } else if (e.getKeyCode() == KeyEvent.VK_D) {
+		            comp.move(10);
+		        }
+		    }
+		});
+		
 		this.model = model;
 		this.frame = new JFrame("CSSE220 Final Project");
 

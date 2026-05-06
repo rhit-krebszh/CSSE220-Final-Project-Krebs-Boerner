@@ -43,22 +43,30 @@ public class Player {
 		public void drawOn(Graphics2D g2) {
   			int x = this.col * TILE_SIZE;
   			int y = this.row * TILE_SIZE;
-
-  			g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+  			
+  			if (sprite != null) {
+  				g2.drawImage(sprite, x, y, TILE_SIZE, TILE_SIZE, null);
+  			}else {
+  				g2.setColor(Color.CYAN);
+  				g2.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+  			}
 		}
 		
 		public void moveBy(int dRow, int dCol){
-			//moveUp
-			this.row = this.row - dRow;
+			this.row += dRow;
+			this.col += dCol;
 			
-			//moveDown
-			this.row = this.row + dRow;
-			
-			//moveLeft
-			this.col = this.col - dCol;
-			
-			//moveRight
-			this.col = this.col + dCol;
+//			//moveUp
+//			this.row = this.row - dRow;
+//			
+//			//moveDown
+//			this.row = this.row + dRow;
+//			
+//			//moveLeft
+//			this.col = this.col - dCol;
+//			
+//			//moveRight
+//			this.col = this.col + dCol;
 		}
 		
 		

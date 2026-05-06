@@ -3,53 +3,68 @@ package ui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import javax.swing.JComponent;
 
 import model.GameModel;
 import model.Player;
 
 public class GameComponent extends JComponent {
-
 	
-	
+	private Player player;
 	private GameModel model;
+	BufferedImage background;
 
 	public GameComponent(GameModel model) {
 	this.model = model;
 	
+	try {
+		background = ImageIO.read(getClass().getResource("background.png"));
+	} catch(IOException e) {
+		background = null;
+	}
+	
+	new Timer(30, e ->{ //look in to how to change
+		model.update();
+		repaint();
+	}).start();
 	
 	}
-	public GameComponent() {
-		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-		this.setBackground(); // note this only works with JPanels and will not work with JComponents
-		this.setOpaque(true);
+//	public GameComponent() {
+//		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+//		this.setBackground(); // note this only works with JPanels and will not work with JComponents
+//		this.setOpaque(true);
 		
 		
 	
 
-	Player player2 = new Player(0, 0, 0);
-	try {
-		background = ImageIO.read(this.getClass().getResource("background.png"));
-	} catch (IOException e) {
-		
-		background = null; //fix -> finish, and use try catch lesson to update
+//	Player player2 = new Player(0, 0, 0);
+//	try {
+//		background = ImageIO.read(this.getClass().getResource("background.png"));
+//	} catch (IOException e) {
+//		
+//		background = null; //fix -> finish, and use try catch lesson to update
 	
 	
-	}
+	//}
 	@Override
 	protected void paintComponent(Graphics g) {
 	super.paintComponent(g);
 	Graphics2D g2 = (Graphics2D)g;
+	
+	if (background != null) {
+		g2.drawImage(background, 0, 0, getWidth(), getHeight(),null);
+	}
 
 	// Minimal placeholder to test  it’s running
 	
-	
-	
-	player2.draw(g2);
+	model.getPlayer().drawOn(g2);
+	model.getEnemy().drawOn(g2);
 	//g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
 
 //add what does stuff
@@ -59,7 +74,14 @@ public class GameComponent extends JComponent {
 		
 		// TODO: Move the ball horizontally by the given amount (x)
 		// Hint: call the ball's shift(...) method
-		player2.shift(x); //make player2 public
+		
+		if (x < 0) {
+			model.getPlayer().moveBy(0, -1);
+		} else {
+			model.getPlayer().moveBy(0, 1);
+		}
+		
+		//player2.shift(x); //make player2 public
 		repaint();
 	}
 	
@@ -68,7 +90,7 @@ public class GameComponent extends JComponent {
 	 */
 	public void center() {
 		// TODO: Reset the ball to its starting position
-		player2.reset();
+		//player2.reset();
 		repaint();
 	}	
 	
