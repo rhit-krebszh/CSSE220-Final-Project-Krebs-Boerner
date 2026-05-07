@@ -21,7 +21,7 @@ public class Enemy {
 		
 		
 		 try {
-	            sprite = ImageIO.read(Player.class.getResource("/model/OIP.png"));
+	            sprite = ImageIO.read(Player.class.getResource("/model/zombie.png"));
 	        } catch (IOException | IllegalArgumentException e) {
 	            sprite = null;
 	        }
