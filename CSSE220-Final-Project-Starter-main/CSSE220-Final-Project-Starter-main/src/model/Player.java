@@ -34,7 +34,7 @@ public class Player {
 
         try {
            
-            sprite = ImageIO.read(Player.class.getResource("/model/tennis.png"));
+            sprite = ImageIO.read(Player.class.getResource("OIP.png"));
         } catch (IOException | IllegalArgumentException e) {
             sprite = null;
         }
@@ -59,7 +59,7 @@ public class Player {
 
     public void moveBy(int dRow, int dCol) {
         row += dRow;
-        col += dCol;
+        col += dCol; 
 
         // columns
         if (col < 0) col = 0;

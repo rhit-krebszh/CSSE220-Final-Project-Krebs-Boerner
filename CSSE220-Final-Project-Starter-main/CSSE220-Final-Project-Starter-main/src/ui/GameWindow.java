@@ -13,6 +13,7 @@ public class GameWindow {
 	
 	private JFrame frame;
 	private GamePanel panel;
+    private static final int TILE_SIZE = 40;
 
 	public GameWindow() { //pass model
 		
@@ -36,7 +37,7 @@ public class GameWindow {
 		this.panel = new GamePanel();
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setContentPane(this.panel);
-		this.frame.setSize(600, 600);
+		this.frame.setSize(TILE_SIZE*15, TILE_SIZE*15);
 		this.frame.setLocationRelativeTo(null);
 	}
 
