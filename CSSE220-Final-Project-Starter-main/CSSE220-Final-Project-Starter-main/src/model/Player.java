@@ -34,7 +34,7 @@ public class Player {
 
         try {
            
-            sprite = ImageIO.read(Player.class.getResource("OIP.png"));
+        	sprite = ImageIO.read(Player.class.getResource("/model/tennis.png"));
         } catch (IOException | IllegalArgumentException e) {
             sprite = null;
         }
