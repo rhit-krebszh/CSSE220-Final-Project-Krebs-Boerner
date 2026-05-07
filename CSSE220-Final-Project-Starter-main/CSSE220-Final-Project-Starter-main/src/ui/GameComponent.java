@@ -101,7 +101,7 @@ public class GameComponent extends JPanel {
 //		player.moveBy(dRow, dCol);
 
 		
-		player.moveBy(dRow, dCol);
+		model.getPlayer().moveBy(dRow, dCol);
 		//player2.shift(x); //make player2 public
 		repaint();
 	}
