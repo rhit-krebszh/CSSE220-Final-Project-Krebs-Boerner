@@ -32,7 +32,8 @@ public class GameComponent extends JPanel {
 	public static final int TILE_SIZE = 40;
 
 	public GameComponent() {
-		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+//		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
+		this.setPreferredSize(new Dimension(getWidth(), getHeight()));
 		this.setBackground(BG);
 		this.setOpaque(true);
 		
@@ -73,7 +74,7 @@ public class GameComponent extends JPanel {
 	Graphics2D g2 = (Graphics2D)g;
 	
 	if (background != null) {
-		g2.drawImage(background, 0, 0, WIDTH, HEIGHT,null);
+		g2.drawImage(background, 0, 0, getWidth(), getHeight(),null);
 	} else {
 		g2.setColor(FG);
 	}

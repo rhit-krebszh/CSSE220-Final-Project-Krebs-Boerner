@@ -37,7 +37,7 @@ public class GameWindow {
 		this.panel = new GamePanel();
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setContentPane(this.panel);
-		this.frame.setSize(TILE_SIZE*15, TILE_SIZE*15);
+		this.frame.setSize((TILE_SIZE*15)+15, (TILE_SIZE*15)+38);
 		this.frame.setLocationRelativeTo(null);
 	}
 
