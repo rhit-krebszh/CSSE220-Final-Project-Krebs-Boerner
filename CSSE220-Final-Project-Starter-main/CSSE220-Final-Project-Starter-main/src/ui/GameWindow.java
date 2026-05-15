@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 /**
  * GameWindow owns the frame
  **/
-public class GameWindow {
+public class GameWindow{
 	
 	private JFrame frame;
 	private GamePanel panel;
@@ -38,6 +38,8 @@ public class GameWindow {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setContentPane(this.panel);
 		this.frame.setSize((TILE_SIZE*15)+15, (TILE_SIZE*15)+38);
+//		this.frame.setSize(getWidth(), getHeight());
+
 		this.frame.setLocationRelativeTo(null);
 	}
 

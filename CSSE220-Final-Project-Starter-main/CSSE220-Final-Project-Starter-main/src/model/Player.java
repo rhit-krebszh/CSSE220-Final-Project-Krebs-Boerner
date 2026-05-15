@@ -9,8 +9,9 @@ import java.awt.Rectangle;
 import javax.imageio.ImageIO;
 
 import ui.GameComponent;
+import ui.GameWindow;
 
-public class Player {
+public class Player{
 
     private int row;
     private int col;
@@ -65,6 +66,8 @@ public class Player {
         if (col < 0) col = 0;
         if (col >= GameComponent.WIDTH / TILE_SIZE) {
             col = (GameComponent.WIDTH / TILE_SIZE) - 1;
+//        if (col >= GameComponent.getWidth() / TILE_SIZE) {
+//          col = (GameComponent.WIDTH / TILE_SIZE) - 1;
         }
         
 
