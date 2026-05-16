@@ -1,7 +1,11 @@
 package model;
 
 import javax.swing.Timer;
+
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 /**
@@ -17,22 +21,105 @@ import java.awt.event.ActionEvent;
 public class GameModel {
 	private Player player;
 	private Enemy enemy;
+	private int[][] maze;
+	public static final int TILE_SIZE = 40;
+	
+	private int lives = 3;
+	private int score = 0;
+	private boolean gameOver = false;
 	
 	public GameModel() {
+		loadLevel("/model/level1");
 		player = new Player(5,5);	
 		enemy = new Enemy(3,3);
 		
 		Timer timer = new Timer(30, e -> update());
 		timer.start();
 	}
-		
-//		Timer timer = new Timer(30, new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				update();
-//			}
-//		}};
-//		timer.start();
-//	}
+	public void loadLevel(String filename) {
+
+	    int row = 0;
+
+	    InputStream stream =
+	        GameModel.class.getResourceAsStream(filename);
+
+	    if (stream == null) {
+	        throw new IllegalStateException(
+	            "Level file not found: " + filename
+	        );
+	    }
+
+	    Scanner scanner = new Scanner(stream);
+
+	    ArrayList<String> lines = new ArrayList<>();
+
+	    // read all lines first
+	    while (scanner.hasNextLine()) {
+	        lines.add(scanner.nextLine());
+	    }
+
+	    scanner.close();
+
+	    int rows = lines.size();
+	    int cols = lines.get(0).length();
+
+	    maze = new int[rows][cols];
+
+	    for (row = 0; row < rows; row++) {
+
+	        String line = lines.get(row);
+
+	        for (int col = 0; col < cols; col++) {
+
+	            char ch = line.charAt(col);
+
+	            // WALL
+	            if (ch == '#') {
+	                maze[row][col] = 1;
+	            }
+
+	            // EMPTY SPACE
+	            else if (ch == '.') {
+	                maze[row][col] = 0;
+	            }
+
+	            // PLAYER
+	            else if (ch == 'P') {
+
+	                maze[row][col] = 0;
+
+	                player = new Player(row, col);
+	            }
+
+	            // ENEMY
+	            else if (ch == 'E') {
+
+	                maze[row][col] = 0;
+
+	                enemy = new Enemy(row, col);
+	            }
+	        }
+	    }
+	}
+	
+public boolean isWall(int row, int col) {
+	if (row < 0 || col < 0 ||
+			row >= maze.length ||
+	        col >= maze[0].length) {
+	        return true;
+	    }
+	return maze[row][col] == 1;
+	}
+public void checkEnemyCollision() {
+	if (gameOver) return;
+	
+	if (player.getRow() == enemy.getRow() && player.getCol() == enemy.getCol()) {
+		lives--;
+		if (lives <= 0) {
+			gameOver = true;
+		}
+	}
+}
 
 public Player getPlayer() {
 	return player;
@@ -40,9 +127,24 @@ public Player getPlayer() {
 public Enemy getEnemy() {
 	return enemy;
 }
+public int[][] getMaze() {
+    return maze;
+}
 
 public void update() {
-	enemy.update();
+	if (gameOver) return;
+	enemy.update(this);
+	checkEnemyCollision();
+}
+
+public int getLives() {
+	return lives;
+}
+public int getScore() {
+	return score;
+}
+public boolean isGameOver() {
+	return gameOver;
 }
 	
 	// Work on the lab to complete GameModel and Player for initial setup

@@ -33,7 +33,7 @@ public class GameComponent extends JPanel {
 
 	public GameComponent() {
 //		this.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-		this.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setBackground(BG);
 		this.setOpaque(true);
 		
@@ -78,6 +78,17 @@ public class GameComponent extends JPanel {
 	} else {
 		g2.setColor(FG);
 	}
+	
+	int[][] maze = model.getMaze();
+	for (int row = 0; row < maze.length; row++) {
+		for (int col = 0; col < maze[row].length;col++) {
+			if (maze[row][col] == 1) {
+				g2.setColor(Color.DARK_GRAY);
+				
+				g2.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE,TILE_SIZE);
+			}
+		}
+	}
 
 	// Minimal placeholder to test  it’s running
 //	player.drawOn(g2);
@@ -102,7 +113,7 @@ public class GameComponent extends JPanel {
 //		player.moveBy(dRow, dCol);
 
 		
-		model.getPlayer().moveBy(dRow, dCol);
+		model.getPlayer().moveBy(dRow, dCol,model);
 		//player2.shift(x); //make player2 public
 		repaint();
 	}

@@ -27,8 +27,8 @@ public class Player{
 
     public Player(int x, int y) {
         
-        this.col = x / TILE_SIZE;
-        this.row = y / TILE_SIZE;
+		this.col = x /* / TILE_SIZE */;
+		this.row = y /* / TILE_SIZE */;
 
         this.startRow = row;
         this.startCol = col;
@@ -58,35 +58,52 @@ public class Player{
         }
     }
 
-    public void moveBy(int dRow, int dCol) {
-        row += dRow;
-        col += dCol; 
-
-        // columns
-        if (col < 0) col = 0;
-        if (col >= GameComponent.WIDTH / TILE_SIZE) {
-            col = (GameComponent.WIDTH / TILE_SIZE) - 1;
-//        if (col >= GameComponent.getWidth() / TILE_SIZE) {
-//          col = (GameComponent.WIDTH / TILE_SIZE) - 1;
-        }
+    public void moveBy(int dRow, int dCol, GameModel model) {
         
-
-        // rows
-        if (row < 0) row = 0;
-        if (row >= GameComponent.HEIGHT / TILE_SIZE) {
-            row = (GameComponent.HEIGHT / TILE_SIZE) - 1;
-        }//moveUp
-//			this.row = this.row - dRow;
-//			
-//			//moveDown
-//			this.row = this.row + dRow;
-//			
-//			//moveLeft
-//			this.col = this.col - dCol;
-//			
-//			//moveRight
-//			this.col = this.col + dCol;
+    	int newRow = row + dRow;
+    	int newCol = col + dCol;
+    	
+//    	row += dRow;
+//      col += dCol; 
+    	
+    	if (!model.isWall(newRow, newCol)) {
+    		row = newRow;
+    		col = newCol;
+    	}
     }
+    
+    public int getRow() {
+    	return row;
+    }
+    public int getCol() {
+    	return col;
+    }
+    	
+//        // columns
+//        if (col < 0) col = 0;
+//        if (col >= GameComponent.WIDTH / TILE_SIZE) {
+//            col = (GameComponent.WIDTH / TILE_SIZE) - 1;
+////        if (col >= GameComponent.getWidth() / TILE_SIZE) {
+////          col = (GameComponent.WIDTH / TILE_SIZE) - 1;
+//        }
+//        
+//
+//        // rows
+//        if (row < 0) row = 0;
+//        if (row >= GameComponent.HEIGHT / TILE_SIZE) {
+//            row = (GameComponent.HEIGHT / TILE_SIZE) - 1;
+//        }//moveUp
+////			this.row = this.row - dRow;
+////			
+////			//moveDown
+////			this.row = this.row + dRow;
+////			
+////			//moveLeft
+////			this.col = this.col - dCol;
+////			
+////			//moveRight
+////			this.col = this.col + dCol;
+//    }
 
     public void reset() {
         this.row = startRow;

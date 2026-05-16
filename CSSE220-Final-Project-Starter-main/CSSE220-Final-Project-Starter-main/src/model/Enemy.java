@@ -40,12 +40,27 @@ public class Enemy {
 		
 	}
 	
-	public void update() {
-		col += direction;
+	public void update(GameModel model) {
+		int newCol = col + direction;
 		
-		if (col <= 0 || col >= 10) {
+		if (model.isWall(row, newCol)) {
 			direction *= -1;
 		}
+		else {
+			col = newCol;
+		}
+//		col += direction;
+//		
+//		if (col <= 0 || col >= 10) {
+//			direction *= -1;
+//		}
 	}
+	
+	public int getRow() {
+    	return row;
+    }
+    public int getCol() {
+    	return col;
+    }
 
 }
