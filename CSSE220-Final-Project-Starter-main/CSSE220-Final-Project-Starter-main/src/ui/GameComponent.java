@@ -14,6 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import model.GameModel;
+import model.Item;
 import model.Player;
 
 
@@ -89,16 +90,19 @@ public class GameComponent extends JPanel {
 			}
 		}
 	}
-
-	// Minimal placeholder to test  it’s running
-//	player.drawOn(g2);
-	
+	for(Item item : model.getItems()) {
+		item.draw(g2);
+	}
 	model.getPlayer().drawOn(g2);
 	model.getEnemy().drawOn(g2);
-	//g2.drawString("Final Project Starter: UI is running ✅", 20, 30);
-
-//add what does stuff
-	// TODO: draw based on model state
+	
+	g2.setColor(Color.BLACK);
+	g2.drawString("Lives: " + model.getLives(), 10, 15);
+	g2.drawString("Score: " + model.getScore(), 10, 35);
+	
+	if (model.isGameOver()) {
+		g2.drawString("Game Over", 275, 300);;
+	}
 	}
 	public void move(int dRow, int dCol) {
 		

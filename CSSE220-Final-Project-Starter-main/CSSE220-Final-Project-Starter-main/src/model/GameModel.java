@@ -27,6 +27,7 @@ public class GameModel {
 	private int lives = 3;
 	private int score = 0;
 	private boolean gameOver = false;
+	private ArrayList<Item> items = new ArrayList<>();
 	
 	public GameModel() {
 		loadLevel("/model/level1");
@@ -98,6 +99,11 @@ public class GameModel {
 
 	                enemy = new Enemy(row, col);
 	            }
+	                
+	            else if (ch == 'C') {
+	            	items.add(new Item(row, col));
+	                
+	            }
 	        }
 	    }
 	}
@@ -115,8 +121,18 @@ public void checkEnemyCollision() {
 	
 	if (player.getRow() == enemy.getRow() && player.getCol() == enemy.getCol()) {
 		lives--;
+		//player.reset();
 		if (lives <= 0) {
 			gameOver = true;
+		}
+	}
+}
+
+public void checkItemCollection() {
+	for (Item item : items) {
+		if (!item.isCollected() && player.getRow() == item.getRow() && player.getCol() == item.getCol()) {
+			item.collect();
+			score++;
 		}
 	}
 }
@@ -135,6 +151,10 @@ public void update() {
 	if (gameOver) return;
 	enemy.update(this);
 	checkEnemyCollision();
+	checkItemCollection();
+}
+public ArrayList<Item> getItems() {
+    return items;
 }
 
 public int getLives() {
